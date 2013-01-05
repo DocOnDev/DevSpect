@@ -1,6 +1,7 @@
 # Requires and Variables
 exp = require 'express'
 app = exp.createServer()
+app.listen();
 stylus = require 'stylus'
 
 # compile on the fly
@@ -20,7 +21,7 @@ app.configure () ->
 
 # Run App
 # app.listen 1337
-# console.log 'Server running at http://localhost:1337/'
+console.log "Server running at http://localhost:#{app.address().port}/"
 
 # Global Helpers
 require('./apps/helpers')(app)
