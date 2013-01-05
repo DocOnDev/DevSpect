@@ -1,6 +1,7 @@
 # Cumulative Flow
 CumulativeFlow = require('../../models/cumulative-flow').CumulativeFlow
-cfd = new CumulativeFlow
+
+upper_first = (phrase) -> (phrase.split(' ').map (word) -> word[0].toUpperCase() + word[1..-1].toLowerCase()).join ' '
 
 zero_pad = (x) ->
     if x < 10 then '0'+x else ''+x
@@ -12,7 +13,9 @@ to_date_string = (dt) ->
     m + '/' + d + '/' + y
 
 routes = (app) ->
-  app.get '/cfd', (req, res) ->
+  app.get '/cfd/:project?', (req, res) ->
+    project_name = req.params.project || 'All'
+    cfd = new CumulativeFlow project_name
     cfd.findAll (err, docs) ->
       xAxis = []
       states = {}
@@ -29,7 +32,7 @@ routes = (app) ->
         series.push {name: name, data: values}
       res.render "#{__dirname}/views/index",
         title: 'Cumulative Flow Diagram'
-        charttitle: 'Personalize Team'
+        charttitle: upper_first(project_name)
         stylesheet: 'cfd'
         err: err
         cfds: docs

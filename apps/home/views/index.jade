@@ -1,11 +1,8 @@
-if (err)
-  h1=err.message
+extends ../../../views/layout
 
-if (cfds)
-  - each cfd in cfds
-    h3=cfd.date.toDateString()
-    p
-    - each val, key in cfd.points
-      span #{key}: #{val} 
-      br
-
+block content
+  ul
+    li
+      a(href="cfd/pull") Pull CFD
+    li
+      a(href="cfd/personalization") Personalization CFD

@@ -27,3 +27,4 @@ require('./apps/helpers')(app)
 
 # Routes
 require('./apps/cfd/routes')(app)
+require('./apps/home/routes')(app)

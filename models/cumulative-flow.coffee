@@ -1,7 +1,7 @@
 cradle = require 'cradle'
 
 class CumulativeFlow
-  constructor: ->
+  constructor: (project_name) ->
     @connect = new cradle.Connection {
       host: 'https://docondev.cloudant.com'
       cache: true
@@ -13,7 +13,7 @@ class CumulativeFlow
         password: "Agil3cloud"
       }
     }
-    @db = @connect.database 'playground'
+    @db = @connect.database 'personalize'
 
   findAll: (callback) ->
     @db.view 'points/all', {descending: false}, (err, res) ->

@@ -1,14 +1,7 @@
-# Cumulative Flow
-CumulativeFlow = require('../../models/cumulative-flow').CumulativeFlow
-cfd = new CumulativeFlow
-
 routes = (app) ->
-  app.get '/cfd', (req, res) ->
-    cfd.findAll (err, docs) ->
-      res.render "#{__dirname}/views/index", 
-        title: 'Index'
-        stylesheet: 'style'
-        err: err
-        cfds: docs
+  app.get '/', (req, res) ->
+    res.render "#{__dirname}/views/index",
+      title: 'Select a Project'
+      stylesheet: 'style'
 
 module.exports = routes
