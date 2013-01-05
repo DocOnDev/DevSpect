@@ -1,0 +1,34 @@
+!!! 5
+html
+  head
+    title= "Metricator :: " + title
+    block scripts
+
+    link(rel='stylesheet', href='/stylesheets/#{stylesheet}.css')
+    script(src='/javascripts/#{stylesheet}.js')
+    
+  body
+
+    #header
+      h1= title
+
+    - var flashTypes = ['info', 'error']
+    each flashType in flashTypes
+      if flash[flashType]
+        p.flash(class=flashType)
+          = flash[flashType]
+
+    block content
+
+    p.thanks
+      span.title Metricator
+      |  is produced by 
+      a(href="http://www.docondev.com") DocOnDev
+      |.
+      br
+      br
+      |  Thanks to  
+      a(href="http://peepcode.com") PeepCode Screencasts
+      |  for the lessons and starting point 
+
+  script(src='/socket.io/socket.io.js')

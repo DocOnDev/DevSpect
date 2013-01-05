@@ -1,0 +1,4 @@
+.DS_STORE
+*.swp
+*.lock
+node_modules/

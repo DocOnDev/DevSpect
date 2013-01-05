@@ -1,0 +1,11 @@
+if (err)
+  h1=err.message
+
+if (cfds)
+  - each cfd in cfds
+    h3=cfd.date.toDateString()
+    p
+    - each val, key in cfd.points
+      span #{key}: #{val} 
+      br
+

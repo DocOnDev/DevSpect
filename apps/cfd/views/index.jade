@@ -1,0 +1,18 @@
+extends ../../../views/layout
+
+block scripts
+  script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js')
+  script(src="http://code.highcharts.com/highcharts.js")
+  script(src="http://code.highcharts.com/modules/exporting.js")
+
+block content
+  #container
+
+  if (err)
+    h1=err.message
+
+  if (cfds)
+    script(type="text/javascript")
+      var xCat = [#{axis}];
+      var dataSeries = !{series}
+      var chartTitle = "#{charttitle}"
