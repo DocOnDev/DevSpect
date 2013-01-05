@@ -19,8 +19,8 @@ app.configure () ->
   app.use exp.session({secret: "Metricator-For-All-My-Friends"})
 
 # Run App
-app.listen 1337
-console.log 'Server running at http://localhost:1337/'
+# app.listen 1337
+# console.log 'Server running at http://localhost:1337/'
 
 # Global Helpers
 require('./apps/helpers')(app)
