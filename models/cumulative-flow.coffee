@@ -13,10 +13,10 @@ class CumulativeFlow
         password: "Agil3cloud"
       }
     }
-    @db = @connect.database 'personalize'
+    @db = @connect.database project_name
 
   findAll: (callback) ->
-    @db.view 'points/all', {descending: false}, (err, res) ->
+    @db.view 'points/cfd', {descending: false}, (err, res) ->
       if (err)
         console.log err
         callback err

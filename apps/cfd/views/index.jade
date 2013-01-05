@@ -6,10 +6,12 @@ block scripts
   script(src="http://code.highcharts.com/modules/exporting.js")
 
 block content
-  #container
 
   if (err)
     h1=err.message
+    h2=charttitle
+
+  #container
 
   if (cfds)
     script(type="text/javascript")

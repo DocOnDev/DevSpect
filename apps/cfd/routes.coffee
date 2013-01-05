@@ -14,9 +14,19 @@ to_date_string = (dt) ->
 
 routes = (app) ->
   app.get '/cfd/:project?', (req, res) ->
-    project_name = req.params.project || 'All'
+    project_name = req.params.project || 'playground'
     cfd = new CumulativeFlow project_name
     cfd.findAll (err, docs) ->
+      if (err)
+        res.render "#{__dirname}/views/index",
+          title: 'Cumulative Flow Diagram'
+          charttitle: 'Project Does Not Exist'
+          stylesheet: 'cfd'
+          err: err
+          cfds: null
+          axis: xAxis
+          series: JSON.stringify(series)
+
       xAxis = []
       states = {}
       series = []
