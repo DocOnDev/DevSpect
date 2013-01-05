@@ -1,7 +1,11 @@
 {
-  "name": "HotPie",
-  "version": "0.0.0",
-  "main": "server.js",
+  "name": "DevSpect",
+  "version": "0.1.0",
+  "main": "server.coffee",
+  "engines": {
+    "node": "0.8.x",
+    "npm": "1.1.x"
+  }
   "directories": {
     "test": "test"
   },
@@ -10,12 +14,12 @@
     "jade": "~0.26.3",
     "coffee-script": "~1.3.3",
     "express-namespace": "~0.1.1",
-    "connect-assets": "2.1.4",
+    "connect-assets": "~2.3.0",
     "underscore": "~1.3.3",
     "stylus": "~0.28.1",
     "qs": "~0.5.0",
     "socket.io": "~0.9.6",
-    "cradle": ">=0.5.8"
+    "cradle": "~0.6.4"
   },
   "devDependencies": {
     "node-dev": "~0.2.4",
