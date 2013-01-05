@@ -1,7 +1,6 @@
 # Requires and Variables
 exp = require 'express'
 app = exp.createServer()
-app.listen();
 stylus = require 'stylus'
 
 # compile on the fly
@@ -20,7 +19,7 @@ app.configure () ->
   app.use exp.session({secret: "Metricator-For-All-My-Friends"})
 
 # Run App
-# app.listen 1337
+app.listen process.env.PORT || 1337
 console.log "Server running at http://localhost:#{app.address().port}/"
 
 # Global Helpers
