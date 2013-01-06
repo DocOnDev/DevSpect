@@ -45,11 +45,28 @@ body p {
 body #header {
   height: 5.25em;
   padding: 0.7375em;
-  padding-left: 7.6875em;
   background-color: #0072bc;
   border-top: 1px solid #3eb3ff;
   border-bottom: 3px solid #024a7f;
   color: #fff;
+}
+body #header #title {
+  padding-top: 0.3em;
+  font-size: 2.7em;
+  letter-spacing: 0.08em;
+}
+body #header #subtitle {
+  font-size: 0.9em;
+  letter-spacing: 0.22em;
+}
+body #main {
+  background-color: #efefef;
+  border: 1px solid rgba(3, 3, 3, 0.75);
+ padding: 0.5em 1.5em 1.75em 1.5em;
+  text-align: left;
+}
+body #main h2 {
+  text-align: center;
 }
 body p.flash {
   margin: 0 auto;
@@ -105,12 +122,12 @@ body ul {
 }
 body li {
   margin: 0;
-  padding: 0.6944444444444444em;
-  padding-left: 3.3333333333333335em;
+  padding: 0.333em;
+  padding-left: 0.999em;
   text-align: left;
 }
 body ul li {
-  font-size: 2.25em;
+  font-size: 1.25em;
   font-weight: normal;
   letter-spacing: 0.027777777777777776em;
   text-overflow: ellipsis;

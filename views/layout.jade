@@ -10,15 +10,21 @@ html
   body
 
     #header
-      h1= title
+      #title
+        | DevSpect
+      #subtitle
+        | The Developer's View
 
-    - var flashTypes = ['info', 'error']
-    each flashType in flashTypes
-      if flash[flashType]
-        p.flash(class=flashType)
-          = flash[flashType]
+    #main
+      h2= title
 
-    block content
+      - var flashTypes = ['info', 'error']
+      each flashType in flashTypes
+        if flash[flashType]
+          p.flash(class=flashType)
+            = flash[flashType]
+
+      block content
 
     p.thanks
       span.title DevSpect
