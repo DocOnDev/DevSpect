@@ -1,3 +1,3 @@
 DevSpect
 
-Developer Insights into Project Status
+The Developer's View

@@ -4,3 +4,17 @@
 node_modules/*
 !node_modules/node-dev/
 !node_modules/node-dev/*
+lib-cov
+*.seed
+*.log
+*.csv
+*.dat
+*.out
+*.pid
+*.gz
+
+pids
+logs
+results
+
+npm-debug.log
