@@ -59,6 +59,10 @@ body #header #subtitle {
   font-size: 0.9em;
   letter-spacing: 0.22em;
 }
+body #header #title a {
+  color: #dde;
+  border-bottom: 0;
+}
 body #main {
   background-color: #efefef;
   border: 1px solid rgba(3, 3, 3, 0.75);
