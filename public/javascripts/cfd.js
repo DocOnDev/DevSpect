@@ -32,10 +32,12 @@ $(function () {
  */
 
 Highcharts.theme = {
-   colors: ["#0072bc", "#379cde", "#23638d", "#004a7a", "#64eade", "#99333e", 
-      "#252b95", "#3941e3", "#000681","#61a179", "#666ce3"],
-   /*colors: ["#DDDF0D", "#7798BF", "#55BF3B", "#DF5353", "#aaeeee", "#ff0066", "#eeaaee",
-      "#55BF3B", "#DF5353", "#7798BF", "#aaeeee"], */
+   colors: ["#0072bc", "#379cde", "#23638d", "#004a7a", "#64eade", "#99333e", "#252b95", "#3941e3", "#000681","#61a179", "#666ce3"],
+   /*
+   colors: ["#DDDF0D", "#7798BF", "#55BF3B", "#DF5353", "#aaeeee", "#ff0066", "#eeaaee", "#55BF3B", "#DF5353", "#7798BF", "#aaeeee"], 
+   colors: ["#514F78", "#42A07B", "#9B5E4A", "#72727F", "#1F949A", "#82914E", "#86777F", "#42A07B"],
+   colors: ['#058DC7', '#50B432', '#ED561B', '#DDDF00', '#24CBE5', '#64E572', '#FF9655', '#FFF263',
+    */
    chart: {
       backgroundColor: {
          linearGradient: [0, 0, 0, 400],
