@@ -27,6 +27,7 @@ app.configure () ->
   app.use exp.bodyParser()
   app.use exp.methodOverride()
   app.use passport.initialize()
+  app.use passport.session()
   app.use exp.cookieParser()
   app.use exp.session({secret: "DevSpect-For-All-My-Friends"})
 
