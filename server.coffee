@@ -18,6 +18,12 @@ passport.use new TwitterStrategy {
     user = users[profile.id] || (users[profile.id] = { id: profile.id, name: profile.username })
     done(null, user)
 
+passport.serializeUser (user, done) ->
+  done null, user
+
+passport.deserializeUser (id, done) ->
+  done(null, users[id])
+
 # App Configuration
 app.configure () ->
   app.set 'view engine', 'jade'
