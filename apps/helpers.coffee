@@ -2,14 +2,14 @@
 helpers = (app) ->
 
   app.dynamicHelpers
+    username: (req, res) ->
+      username = null
+      if req.user
+        username = req.user.name
+      username
     flash: (req, res) -> req.flash()
     
   app.helpers
-    urlFor: (obj) ->
-      if obj.id
-        "/admin/pies/#{obj.id}"
-      else
-        "/admin/pies"
     cssClassForState: (expected, actual) ->
       if actual is expected
         [expected, 'on']

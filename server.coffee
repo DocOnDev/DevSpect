@@ -9,21 +9,27 @@ stylus = require 'stylus'
 require 'coffee-script'
 require('./apps/socket-io')(app)
 
+callBackURL = (serviceName) ->
+  if process.ENV
+    domain = 'http://devspect.com'
+  else
+    domain = 'http://localhost:1337'
+  url = "#{domain}/auth/#{serviceName}/callback"
+
 passport.use new TwitterStrategy {
   consumerKey: '1301yY5d1qQD5HWVYtAA',
   consumerSecret: 'iEo7n9756AesXzjborhu8LDXTWR53TEz4Y3T8WDe4',
-  callbackURL: "http://www.devspect.com/auth/twitter/callback"
-  },
+  callbackURL: callBackURL('twitter')  },
   (token, tokenSecret, profile, done) ->
-    user = users[profile.id] || (users[profile.id] = { id: profile.id, name: profile.username })
-    user = {id: "Doc", name: "Michael 'Doc' Norton"}
+    console.log "User is #{profile.id} / #{profile.username}"
+    user = {id: profile.id, name: profile.username}
     done(null, user)
 
 passport.serializeUser (user, done) ->
   done null, user
 
-passport.deserializeUser (id, done) ->
-  done(null, users[id])
+passport.deserializeUser (user, done) ->
+  done null, user
 
 # App Configuration
 app.configure () ->
@@ -33,10 +39,10 @@ app.configure () ->
   app.use exp.static __dirname + '/public'
   app.use exp.bodyParser()
   app.use exp.methodOverride()
-  app.use passport.initialize()
-  app.use passport.session()
   app.use exp.cookieParser()
   app.use exp.session({secret: "DevSpect-For-All-My-Friends"})
+  app.use passport.initialize()
+  app.use passport.session()
 
 # Run App
 app.listen process.env.PORT || 1337
@@ -47,7 +53,9 @@ require('./apps/helpers')(app)
 
 # Routes
 app.get '/auth/twitter', passport.authenticate('twitter')
-app.get '/auth/twitter/callback', passport.authenticate('twitter', { successRedirect: '/', failureRedirect: '/auth/twitter' })
+app.get '/login', (req, res) -> 
+  res.send('<html><body><a href="/auth/twitter">Sign in with Twitter</a></body></html>')
+app.get '/auth/twitter/callback', passport.authenticate('twitter', { successReturnToOrRedirect: '/', failureRedirect: '/login' })
 
 require('./apps/cfd/routes')(app)
 require('./apps/home/routes')(app)

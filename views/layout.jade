@@ -15,6 +15,11 @@ html
           | DevSpect
       #subtitle
         | The Developer's View
+      #user
+        if username
+          = username
+        else
+          a(href="/auth/twitter") Login
 
     #main
       h2= title

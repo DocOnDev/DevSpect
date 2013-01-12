@@ -43,7 +43,7 @@ body p {
   padding: 1em;
 }
 body #header {
-  height: 5.25em;
+  height: 5.75em;
   padding: 0.7375em;
   background-color: #0072bc;
   border-top: 1px solid #3eb3ff;
@@ -59,7 +59,10 @@ body #header #subtitle {
   font-size: 0.9em;
   letter-spacing: 0.22em;
 }
-body #header #title a {
+body #header #user {
+  text-align: right;
+}
+body #header a {
   color: #dde;
   border-bottom: 0;
 }
