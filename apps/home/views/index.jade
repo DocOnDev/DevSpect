@@ -2,10 +2,15 @@ extends ../../../views/layout
 
 block content
   h3= "Select A Project"
-  ul
-    li
-      a(href="cfd/pull") Pull CFD
-    li
-      a(href="cfd/personalization") Personalization CFD
-    li
-      a(href="cfd/humor") Humor CFD
+  if username
+    ul
+      li
+        a(href="cfd/pull") Pull CFD
+      li
+        a(href="cfd/personalization") Personalization CFD
+      li
+        a(href="cfd/humor") Humor CFD
+  else
+    ul
+      li
+        a(href="cfd/devspect") DevSpect CFD
