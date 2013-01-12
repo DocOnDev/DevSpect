@@ -16,6 +16,7 @@ passport.use new TwitterStrategy {
   },
   (token, tokenSecret, profile, done) ->
     user = users[profile.id] || (users[profile.id] = { id: profile.id, name: profile.username })
+    user = {id: "Doc", name: "Michael 'Doc' Norton"}
     done(null, user)
 
 passport.serializeUser (user, done) ->
