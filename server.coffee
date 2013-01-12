@@ -10,7 +10,7 @@ require 'coffee-script'
 require('./apps/socket-io')(app)
 
 callBackURL = (serviceName) ->
-  if process.ENV
+  if process.env
     domain = 'http://devspect.com'
   else
     domain = 'http://localhost:1337'
@@ -53,8 +53,6 @@ require('./apps/helpers')(app)
 
 # Routes
 app.get '/auth/twitter', passport.authenticate('twitter')
-app.get '/login', (req, res) -> 
-  res.send('<html><body><a href="/auth/twitter">Sign in with Twitter</a></body></html>')
 app.get '/auth/twitter/callback', passport.authenticate('twitter', { successReturnToOrRedirect: '/', failureRedirect: '/login' })
 
 require('./apps/cfd/routes')(app)
