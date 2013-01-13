@@ -10,7 +10,7 @@ require 'coffee-script'
 require('./apps/socket-io')(app)
 
 callBackURL = (serviceName) ->
-  if process.env
+  if process.env.PORT
     domain = 'http://devspect.com'
   else
     domain = 'http://localhost:1337'
