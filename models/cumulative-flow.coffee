@@ -9,8 +9,8 @@ class CumulativeFlow
       port: 443
       secure: true
       auth: {
-        username: "docondev"
-        password: "Agil3cloud"
+        username: "shalmordinfrosequeedderb"
+        password: "nSG4S4nqKYWiSJNSv3n6xM3M"
       }
     }
     @db = @connect.database project_name
