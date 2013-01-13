@@ -14,7 +14,7 @@ to_date_string = (dt) ->
 
 routes = (app) ->
   app.get '/cfd/:project?', (req, res) ->
-    project_name = req.params.project || 'playground'
+    project_name = req.params.project || 'devspect'
     cfd = new CumulativeFlow project_name
     cfd.findAll (err, docs) ->
       if (err)
