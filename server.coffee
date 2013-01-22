@@ -54,6 +54,9 @@ require('./apps/helpers')(app)
 # Routes
 app.get '/auth/twitter', passport.authenticate('twitter')
 app.get '/auth/twitter/callback', passport.authenticate('twitter', { successReturnToOrRedirect: '/', failureRedirect: '/login' })
+app.get '/logout', (req, res) ->
+  req.logout()
+  res.redirect '/'
 
 require('./apps/cfd/routes')(app)
 require('./apps/home/routes')(app)

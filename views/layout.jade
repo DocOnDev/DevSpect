@@ -18,6 +18,8 @@ html
       #user
         if username
           = username
+          |  :: 
+          a(href="/logout") Logout
         else
           a(href="/auth/twitter") Login
 
