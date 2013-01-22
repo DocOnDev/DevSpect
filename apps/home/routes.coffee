@@ -1,10 +1,11 @@
 routes = (app) ->
   app.get '/', (req, res) ->
-    project_list = []
+    project_list = [{uri: "devspect", name: "DevSpect"}]
     if req.user
-      project_list = [{uri: "humor", name: "Humor"}, {uri: "personalization", name: "Personalize"}, {uri: "pull", name: "Pull"}]
+      project_list << {uri: "humor", name: "Humor"}
+      project_list << {uri: "personalization", name: "Personalize"}
+      project_list << {uri: "pull", name: "Pull"}
     else
-      project_list = [{uri: "devspect", name: "DevSpect"}, {uri: "playground", name: "Sample Project"}]
     res.render "#{__dirname}/views/index",
       title: 'Home'
       stylesheet: 'style'
