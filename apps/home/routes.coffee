@@ -1,10 +1,11 @@
 routes = (app) ->
   app.get '/', (req, res) ->
     project_list = [{uri: "devspect", name: "DevSpect"}]
+    console.log project_list
     if req.user
-      project_list << {uri: "humor", name: "Humor"}
-      project_list << {uri: "personalization", name: "Personalize"}
-      project_list << {uri: "pull", name: "Pull"}
+      project_list.push {uri: "humor", name: "Humor"}
+      project_list.push {uri: "personalization", name: "Personalize"}
+      project_list.push {uri: "pull", name: "Pull"}
     else
     res.render "#{__dirname}/views/index",
       title: 'Home'
