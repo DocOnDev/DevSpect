@@ -12,7 +12,7 @@ $(function () {
       title: { text: _chartTitle },
           // type: 'datetime',
           //                 maxZoom: 14 * 24 * 3600000, // fourteen days
-      xAxis: { categories: _xCat, tickmarkPlacement: 'on', title: { enabled: false }, type: 'datetime' },
+      xAxis: { categories: _xCat, tickmarkPlacement: 'on', title: { enabled: false }, type: 'datetime', maxZoom: 14 * 24 * 3600000 },
       yAxis: { title: { text: 'Points' } },
       tooltip: { formatter: function() { return ''+ this.x +': '+ Highcharts.numberFormat(this.y, 0, ',') +' points'; } },
       plotOptions: {
