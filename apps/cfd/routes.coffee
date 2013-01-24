@@ -12,8 +12,18 @@ to_date_string = (dt) ->
     y = dt.getFullYear()
     m + '/' + d + '/' + y
 
+ensureAuthenticated = (req, res, next) ->
+  if req.isAuthenticated()
+    next()
+  else
+    if req.params.project == 'devspect'
+      next()
+    else
+      req.flash 'error', 'Please login.'
+      res.redirect '/'
+
 routes = (app) ->
-  app.get '/cfd/:project?', (req, res) ->
+  app.get '/cfd/:project?', ensureAuthenticated, (req, res) ->
     project_name = req.params.project || 'devspect'
     cfd = new CumulativeFlow project_name
     cfd.findAll (err, docs) ->
