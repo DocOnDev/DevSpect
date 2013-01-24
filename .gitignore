@@ -1,6 +1,7 @@
 .DS_STORE
 *.swp
 *.lock
+compiled/*
 node_modules/*
 !node_modules/node-dev/
 !node_modules/node-dev/*
