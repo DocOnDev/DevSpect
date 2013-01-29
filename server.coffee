@@ -3,7 +3,7 @@ exp = require 'express'
 app = exp.createServer()
 passport = require 'passport'
 TwitterStrategy = require('passport-twitter').Strategy
-User = require('./models/user.coffee').User
+#User = require('./models/user.coffee').User
 stylus = require 'stylus'
 
 # compile on the fly
@@ -53,14 +53,6 @@ console.log "Server running at http://localhost:#{app.address().port}/"
 require('./apps/helpers')(app)
 
 # Routes
-app.get '/auth/twitter', passport.authenticate('twitter')
-app.get '/auth/twitter/callback', passport.authenticate('twitter', { failureRedirect: '/login' }), (req, res) ->
-  req.flash 'info', "Welcome #{req.user.name}"
-  res.redirect '/'
-
-app.get '/logout', (req, res) ->
-  req.logout()
-  res.redirect '/'
-
+require('./apps/auth/routes')(app, passport)
 require('./apps/cfd/routes')(app)
 require('./apps/home/routes')(app)
