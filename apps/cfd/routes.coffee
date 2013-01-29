@@ -19,7 +19,7 @@ ensureAuthenticated = (req, res, next) ->
     if req.params.project == 'devspect'
       next()
     else
-      req.flash 'error', 'Please login.'
+      req.flash 'error', ' Please login.'
       res.redirect '/'
 
 routes = (app) ->
