@@ -23,7 +23,7 @@ passport.use new TwitterStrategy {
   callbackURL: callBackURL('twitter')  },
   (token, tokenSecret, profile, done) ->
     console.log "User is #{profile.id} / #{profile.username}"
-    user = {id: profile.id, name: profile.username}
+    user = {id: profile.id, twitter_name: profile.username, name: profile.username}
     done(null, user)
 
 passport.serializeUser (user, done) ->

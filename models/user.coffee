@@ -22,7 +22,7 @@ class User
       else
         res.forEach (row) ->
           if row.id == user_name
-            callback null, row.id
+            callback null, {id: row.id, name: row.name}
 
   projectList: (callback) ->
     @db.view 'user/project_list', (err, res) ->
