@@ -15,15 +15,14 @@ class User
     }
     @db = @connect.database "devspect"
 
-  validate: (user_name, done) ->
-    @db.view 'user/twitter_name', (err, res) ->
+  validate: (user_name, callback) ->
+    @db.view 'user/twitter_name', {descending: true, "key": user_name}, (err, res) ->
       if (err)
-        done err, null
+        callback err, null
       else
         res.forEach (row) ->
-          console.log row.id
           if row.id == user_name
-            done null, row.id
+            callback null, row.id
 
   projectList: (callback) ->
     @db.view 'user/project_list', (err, res) ->
