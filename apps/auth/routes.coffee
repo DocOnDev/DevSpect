@@ -14,7 +14,7 @@ isValidUser = (user_name) ->
 
 routes = (app, passport) ->
   app.get '/auth/twitter', passport.authenticate('twitter')
-  app.get '/auth/twitter/callback', passport.authenticate('twitter', { failureRedirect: '/login' }), (req, res) ->
+  app.get '/auth/twitter/callback', passport.authenticate('twitter', { failureRedirect: '/' }), (req, res) ->
     validateUser req.user.name, (username) ->
       if username
         req.flash 'info', "Welcome #{username}"
