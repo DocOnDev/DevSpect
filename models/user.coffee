@@ -31,20 +31,25 @@ class User
             found = true
             @id = row.id
             @name = row.name
-            callback null, @
-        callback null, false if !found
+          callback null, @
+      callback null, false if !found
 
   projectList: (callback) ->
-    callback null, @projects if @projects
-
-    @db.view 'user/project_list', {"key": ["user/#{twitterName}",1]}, (err, res) ->
+    @projects = []
+    currentUser = @
+    @db.view 'user/project_list', {descending: false}, (err, res) ->
+      found = false
       if (err)
-        console.log err
-        callback err
+        callback err, null
       else
-        projects = []
+        currentUser.projects.push {uri: "humor", name: "Humor"}
+        currentUser.projects.push {uri: "personalization", name: "Personalize"}
+        currentUser.projects.push {uri: "pull", name: "Pull"}
         res.forEach (row) ->
-          projects.push row
-        callback null, projects
+          if row.type == "project"
+            found = true
+            currentUser.projects.push {name: row.value, uri: row.value}
+        callback null, currentUser
+      callback null, false if !found
 
 exports.User = User
