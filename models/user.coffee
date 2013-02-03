@@ -20,7 +20,6 @@ class User
     @db = @connect.database "devspect"
 
   validate: (callback) ->
-    thisUser = @
     twitterName = @twitterName
     @db.view 'user/twitter_name', {descending: true, "key": @twitterName}, (err, res) ->
       found = false
@@ -30,9 +29,9 @@ class User
         res.forEach (row) ->
           if row.id == twitterName
             found = true
-            thisUser.id = row.id
-            thisUser.name = row.name
-            callback null, thisUser
+            @id = row.id
+            @name = row.name
+            callback null, @
         callback null, false if !found
 
   projectList: (callback) ->

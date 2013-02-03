@@ -5,8 +5,6 @@ helpers = (app) ->
     username: (req, res) ->
       username = null
       if req.user
-        console.log "Helper User is #{req.user.twitterName}"
-        console.log req.user
         username = req.user.name
       username
     flash: (req, res) -> req.flash()
