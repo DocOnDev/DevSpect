@@ -8,7 +8,6 @@ validateUser = (userName, next) ->
     else
       next user
 
-
 routes = (app, passport) ->
   app.get '/auth/twitter', passport.authenticate('twitter')
   app.get '/auth/twitter/callback', passport.authenticate('twitter', { failureRedirect: '/' }), (req, res) ->

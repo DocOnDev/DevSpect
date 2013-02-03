@@ -42,13 +42,11 @@ class User
       if (err)
         callback err, null
       else
-        currentUser.projects.push {uri: "humor", name: "Humor"}
-        currentUser.projects.push {uri: "personalization", name: "Personalize"}
-        currentUser.projects.push {uri: "pull", name: "Pull"}
         res.forEach (row) ->
           if row.type == "project"
-            found = true
-            currentUser.projects.push {name: row.value, uri: row.value}
+            if currentUser.twitterName != null || row.value.isPublic == true
+              found = true
+              currentUser.projects.push {name: row.value.name, uri: row.value.uri}
         callback null, currentUser
       callback null, false if !found
 
