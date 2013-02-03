@@ -3,7 +3,7 @@ exp = require 'express'
 app = exp.createServer()
 passport = require 'passport'
 TwitterStrategy = require('passport-twitter').Strategy
-#User = require('./models/user.coffee').User
+User = require('./models/user.coffee').User
 stylus = require 'stylus'
 
 # compile on the fly
@@ -23,7 +23,7 @@ passport.use new TwitterStrategy {
   callbackURL: callBackURL('twitter')  },
   (token, tokenSecret, profile, done) ->
     console.log "User is #{profile.id} / #{profile.username}"
-    user = {id: profile.id, twitter_name: profile.username, name: profile.username}
+    user = new User profile.username
     done(null, user)
 
 passport.serializeUser (user, done) ->
