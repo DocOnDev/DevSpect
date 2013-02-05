@@ -6,11 +6,8 @@ upper_first = (phrase) -> (phrase.split(' ').map (word) -> word[0].toUpperCase()
 zero_pad = (x) ->
     if x < 10 then '0'+x else ''+x
 
-to_date_string = (dt) ->
-    d = zero_pad(dt.getDate())
-    m = zero_pad(dt.getMonth() + 1)
-    y = dt.getFullYear()
-    m + '/' + d + '/' + y
+toDateFormat = (dt) ->
+  dt.getTime()
 
 ensureAuthenticated = (req, res, next) ->
   if req.isAuthenticated()
@@ -41,7 +38,7 @@ routes = (app) ->
       states = {}
       series = []
       for doc in docs
-        xAxis.push "'#{to_date_string doc.date}'"
+        xAxis.push "#{toDateFormat doc.date}"
         for state of doc.points
           points = doc.points[state]
           if states[state]

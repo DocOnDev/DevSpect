@@ -10,7 +10,13 @@ $(function () {
     chart = new Highcharts.Chart({
       chart: { renderTo: 'container', type: 'area', zoomType: 'xy' },
       title: { text: _chartTitle },
-      xAxis: { categories: _xCat, tickmarkPlacement: 'on', title: { enabled: false } },
+      xAxis: { categories: _xCat, type: 'datetime',dateTimeLabelFormats: {
+         hour: '%H:%M',
+         day: '%e. %b',
+         week: '%e. %b',
+         month: '%b \'%y',
+         year: '%Y'
+       } },
       yAxis: { title: { text: 'Points' } },
       tooltip: { formatter: function() { return ''+ this.x +': '+ Highcharts.numberFormat(this.y, 0, ',') +' points'; } },
       plotOptions: {

@@ -52,9 +52,7 @@ class User
 
         projects = {}
         for proj in nonPublicProjects
-          projects[proj.id] = proj
-
-        console.log projects
+          projects[proj._id] = proj
 
         res.forEach (row) ->
           if row.type == "access" && row.value.user == "user/#{currentUser.twitterName}"
