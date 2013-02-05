@@ -54,6 +54,8 @@ class User
         for proj in nonPublicProjects
           projects[proj.id] = proj
 
+        console.log projects
+
         res.forEach (row) ->
           if row.type == "access" && row.value.user == "user/#{currentUser.twitterName}"
             project_id = row.value.project
