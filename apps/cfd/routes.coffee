@@ -1,4 +1,4 @@
-# Cumulative Flow
+Project = require('../../models/project').Project
 CumulativeFlow = require('../../models/cumulative-flow').CumulativeFlow
 
 upper_first = (phrase) -> (phrase.split(' ').map (word) -> word[0].toUpperCase() + word[1..-1].toLowerCase()).join ' '
@@ -13,11 +13,14 @@ ensureAuthenticated = (req, res, next) ->
   if req.isAuthenticated()
     next()
   else
-    if req.params.project == 'devspect'
-      next()
-    else
-      req.flash 'error', ' Please login.'
-      res.redirect '/'
+    prj = new Project(req.params.project)
+    prj.isPublic (err, found) ->
+      console.log found
+      if found
+        next()
+      else
+        req.flash 'error', ' Please login.'
+        res.redirect '/'
 
 routes = (app) ->
   app.get '/cfd/:project?', ensureAuthenticated, (req, res) ->
