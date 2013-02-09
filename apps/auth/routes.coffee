@@ -13,8 +13,6 @@ routes = (app, passport) ->
   app.get '/auth/twitter/callback', passport.authenticate('twitter', { failureRedirect: '/' }), (req, res) ->
     validateUser req.user.twitterName, (user) ->
       if user
-        req.user.name = user.name
-        req.user.id = user.id
         req.flash 'info', "Welcome #{req.user.name}"
         res.redirect '/'
       else

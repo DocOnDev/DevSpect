@@ -24,7 +24,8 @@ passport.use new TwitterStrategy {
   (token, tokenSecret, profile, done) ->
     console.log "User is #{profile.id} / #{profile.username}"
     user = new User profile.username
-    done(null, user)
+    user.validate (err, user) ->
+      done(null, user)
 
 passport.serializeUser (user, done) ->
   done null, user

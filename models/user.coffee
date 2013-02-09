@@ -1,6 +1,5 @@
 CradleModel = require('./cradle_model').CradleModel
 
-
 class User extends CradleModel
 
   initialize: (twitterName) ->
@@ -8,7 +7,7 @@ class User extends CradleModel
     @id = null
     @name = null
     @projects = null
-
+    @isAdmin = false
 
   validate: (callback) ->
     @db.view 'user/twitter_name', {descending: true, "key": @twitterName}, (err, res) =>
@@ -18,40 +17,29 @@ class User extends CradleModel
         user = row.value
         @id = user.id
         @name = user.name
+        @isAdmin = user.isAdmin
       callback null, @
 
   projectList: (callback) ->
     @projects = []
-    currentUser = @
-    @db.view 'user/project_list', {descending: false}, (err, res) ->
+    @db.view 'user/project_list', {descending: false}, (err, res) =>
       return callback(err, null) if err
 
-      found = false
-
-      nonPublicProjects = []
-
-      for row in res when row.key[0] == 'project'
-        project = row.value
-
-        if project.isPublic
-          currentUser.projects.push {name: project.name, uri: project.uri}
-        else
-          nonPublicProjects.push project
-
       projects = {}
-      for proj in nonPublicProjects
-        projects[proj._id] = proj
+      projects[row.value._id] = row.value for row in res when row.key[0] == 'project'
 
-      res.forEach (row) ->
-        if row.type == "access" && row.value.user == "user/#{currentUser.twitterName}"
-          project_id = row.value.project
-          found = true
-          if project_id == "*"
-            currentUser.projects.push {name: prj.name, uri: prj.uri} for prj in nonPublicProjects
-          else
-            currentUser.projects.push {name: projects[project_id].name, uri: projects[project_id].uri}
-      currentUser.projects.sort (a,b) -> return if a.name.toUpperCase() >= b.name.toUpperCase() then 1 else -1
-      callback null, currentUser
+      @projects.push projects[prj] for prj of projects when projects[prj].isPublic
+      #@projects.push projects[prj] for prj of projects when !projects[prj].isPublic if @isAdmin
+
+      for row in res when row.value.type == "access" && row.value.value.user == "user/#{@twitterName}"
+        project_id = row.value.value.project
+        if project_id == "*"
+          @projects.push projects[prj] for prj of projects when !projects[prj].isPublic
+        else
+          @projects.push projects[project_id]
+
+      @projects.sort (a,b) -> return if a.name.toUpperCase() >= b.name.toUpperCase() then 1 else -1
+      callback null, @
 
 exports.User = User
 
