@@ -20,7 +20,7 @@ class User extends CradleModel
         @isAdmin = user.isAdmin
       callback null, @
 
-  projectList: (callback) ->
+  listProjects: (callback) ->
     @projects = []
     @db.view 'user/project_list', {descending: false}, (err, res) =>
       return callback(err, null) if err
