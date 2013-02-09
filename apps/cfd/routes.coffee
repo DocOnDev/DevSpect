@@ -1,26 +1,15 @@
 Project = require('../../models/project').Project
 CumulativeFlow = require('../../models/cumulative-flow').CumulativeFlow
-
-upper_first = (phrase) -> (phrase.split(' ').map (word) -> word[0].toUpperCase() + word[1..-1].toLowerCase()).join ' '
-
-zero_pad = (x) ->
-    if x < 10 then '0'+x else ''+x
-
-toDateFormat = (dt) ->
-  dt.getTime()
+{upperFirst, toDateFormat} = require '../formatters'
 
 ensureAuthenticated = (req, res, next) ->
-  if req.isAuthenticated()
-    next()
-  else
-    prj = new Project(req.params.project)
-    prj.isPublic (err, found) ->
-      console.log found
-      if found
-        next()
-      else
-        req.flash 'error', ' Please login.'
-        res.redirect '/'
+  return next() if req.isAuthenticated()
+
+  prj = new Project(req.params.project)
+  prj.isPublic (err, found) ->
+    return next() if found
+    req.flash 'error', ' Please login.'
+    res.redirect '/'
 
 routes = (app) ->
   app.get '/cfd/:project?', ensureAuthenticated, (req, res) ->
@@ -52,7 +41,7 @@ routes = (app) ->
         series.push {name: name, data: values}
       res.render "#{__dirname}/views/index",
         title: 'Cumulative Flow Diagram'
-        charttitle: upper_first(project_name)
+        charttitle: upperFirst(project_name)
         stylesheet: 'cfd'
         err: err
         cfds: docs
