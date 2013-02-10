@@ -30,17 +30,17 @@ routes = (app) ->
           axis: xAxis
           series: JSON.stringify(series)
 
-      xAxis = []
       states = {}
       series = []
+      _points = []
       for doc in docs
-        xAxis.push "#{toDateFormat doc.date}"
+        _date = toDateFormat doc.date
         for state of doc.points
           points = doc.points[state]
           if states[state]
-            states[state].push points
+            states[state].push [_date, points]
           else
-            states[state] = [points]
+            states[state] = [[_date, points]]
       for name, values of states
         series.push {name: name, data: values}
       res.render "#{__dirname}/views/index",
@@ -49,7 +49,6 @@ routes = (app) ->
         stylesheet: 'cfd'
         err: err
         cfds: docs
-        axis: xAxis
         series: JSON.stringify(series)
 
 module.exports = routes

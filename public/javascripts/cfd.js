@@ -3,17 +3,16 @@ var chart;
 
 $(function () {
   $(document).ready(function() {
-    _xCat = (typeof xCat != 'undefined' ? xCat : []);
     _dataSeries = (typeof dataSeries != 'undefined' ? dataSeries : []);
     _chartTitle = (typeof chartTitle != 'undefined' ? chartTitle : 'Cumulative Flow Diagram');
 
     chart = new Highcharts.Chart({
       chart: { renderTo: 'container', type: 'area', zoomType: 'xy' },
       title: { text: _chartTitle },
-      xAxis: { categories: _xCat, type: 'datetime',dateTimeLabelFormats: {
+      xAxis: { type: 'datetime',dateTimeLabelFormats: {
          hour: '%H:%M',
-         day: '%e. %b',
-         week: '%e. %b',
+         day: '%d-%b-%Y',
+         week: '%d-%b-%Y',
          month: '%b \'%y',
          year: '%Y'
        } },
