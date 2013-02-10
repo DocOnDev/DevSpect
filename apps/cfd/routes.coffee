@@ -6,8 +6,7 @@ accessAllowed = (req, res, next) ->
   project_name = req.params.project
 
   if req.isAuthenticated()
-    for proj in req.user.projects
-      if proj._id == "project/#{project_name}"
+    for proj in req.user.projects when proj._id == "project/#{project_name}"
         return next()
 
   prj = new Project project_name
