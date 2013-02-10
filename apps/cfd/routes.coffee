@@ -2,18 +2,23 @@ Project = require('../../models/project').Project
 CumulativeFlow = require('../../models/cumulative-flow').CumulativeFlow
 {upperFirst, toDateFormat} = require '../formatters'
 
-ensureAuthenticated = (req, res, next) ->
-  return next() if req.isAuthenticated()
+accessAllowed = (req, res, next) ->
+  project_name = req.params.project
 
-  prj = new Project(req.params.project)
+  if req.isAuthenticated()
+    for proj in req.user.projects
+      if proj._id == "project/#{project_name}"
+        return next()
+
+  prj = new Project project_name
   prj.isPublic (err, found) ->
     return next() if found
-    req.flash 'error', ' Please login.'
+    req.flash 'error', ' You do not have access to this project.'
     res.redirect '/'
 
 routes = (app) ->
-  app.get '/cfd/:project?', ensureAuthenticated, (req, res) ->
-    project_name = req.params.project || 'devspect'
+  app.get '/cfd/:project?', accessAllowed, (req, res) ->
+    project_name = req.params.project
     cfd = new CumulativeFlow project_name
     cfd.findAll (err, docs) ->
       if (err)
