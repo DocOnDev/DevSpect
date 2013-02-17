@@ -17,7 +17,7 @@ $(function () {
          year: '%Y'
        } },
       yAxis: { title: { text: 'Points' } },
-      tooltip: { formatter: function() { return ''+ this.x +': '+ Highcharts.numberFormat(this.y, 0, ',') +' points'; } },
+      tooltip: { formatter: function() { return ''+ Highcharts.dateFormat('%d-%b', this.x) +': '+ Highcharts.numberFormat(this.y, 0, ',') +' points'; } },
       plotOptions: {
         area: {
           stacking: 'normal',
