@@ -9,21 +9,29 @@ $(function () {
     chart = new Highcharts.Chart({
       chart: { renderTo: 'container', type: 'area', zoomType: 'xy' },
       title: { text: _chartTitle },
-      xAxis: { type: 'datetime',dateTimeLabelFormats: {
-         hour: '%H:%M',
-         day: '%d-%b-%Y',
-         week: '%d-%b-%Y',
-         month: '%b \'%y',
-         year: '%Y'
+      xAxis: { type: 'datetime', tickInterval: (24 * 3600 * 1000 ), 
+        dateTimeLabelFormats: {
+           day: '%d-%b-%Y',
+           week: '%d-%b-%Y',
+           month: '%b \'%y',
+           year: '%Y'
        } },
       yAxis: { title: { text: 'Points' } },
+      legend: {
+        layout: 'vertical',
+        backgroundColor: '#327aaf',
+        align: 'left',
+        verticalAlign: 'top',
+        x: 100,
+        y: 70,
+        floating: true,
+        shadow: true
+      },
       tooltip: { formatter: function() { return ''+ Highcharts.dateFormat('%d-%b', this.x) +': '+ Highcharts.numberFormat(this.y, 0, ',') +' points'; } },
       plotOptions: {
         area: {
           stacking: 'normal',
-          lineColor: '#666666',
           lineWidth: 1,
-          marker: { lineWidth: 1, lineColor: '#666666' }
         }
       },
       series: _dataSeries
