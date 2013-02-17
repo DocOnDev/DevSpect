@@ -1,0 +1,19 @@
+extends ../../../views/layout
+
+block scripts
+  script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js')
+  script(src="http://code.highcharts.com/highcharts.js")
+  script(src="http://code.highcharts.com/modules/exporting.js")
+
+block content
+
+  if (err)
+    h1=err.message
+    h2=charttitle
+
+  #container
+
+  if (velocity)
+    script(type="text/javascript")
+      var dataSeries = !{series}
+      var chartTitle = "#{charttitle}"

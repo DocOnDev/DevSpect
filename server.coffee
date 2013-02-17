@@ -56,4 +56,5 @@ require('./apps/helpers')(app)
 # Routes
 require('./apps/auth/routes')(app, passport)
 require('./apps/cfd/routes')(app)
+require('./apps/velocity/routes')(app)
 require('./apps/home/routes')(app)
