@@ -27,7 +27,6 @@ routes = (app) ->
           stylesheet: 'cfd'
           err: err
           cfds: null
-          axis: xAxis
           series: JSON.stringify(series)
 
       states = {}

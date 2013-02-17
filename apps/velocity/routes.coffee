@@ -27,14 +27,12 @@ routes = (app) ->
           stylesheet: 'velocity'
           err: err
           velocity: null
-          axis: xAxis
           series: JSON.stringify(series)
 
       series = []
       _points = []
       for doc in docs
         _points.push [(toDateFormat doc.date), doc.points]
-        console.log _points
 
       series.push {name: 'velocity', data: _points}
       res.render "#{__dirname}/views/index",
