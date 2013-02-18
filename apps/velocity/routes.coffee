@@ -53,8 +53,6 @@ routes = (app) ->
       _points = []
       _avgs = []
       _devs = []
-      _dev_low = []
-      _dev_high = []
       for doc in docs
         _date = toDateFormat doc.date
         _velocity.push [_date, doc.points]
@@ -62,9 +60,7 @@ routes = (app) ->
         _avg = avg(_points, 3)
         _avgs.push [_date, _avg]
         _dev = dev(_points)
-        dev_low = parseInt(_avg - _dev)
-        dev_high = parseInt(_avg + _dev)
-        _devs.push [_date, dev_low, dev_high]
+        _devs.push [_date, parseInt(_avg - _dev), parseInt(_avg + _dev)]
 
       series.push {type: 'column', name: 'Velocity', data: _velocity}
       series.push {type: 'areasplinerange', name: 'Deviation', data: _devs}
