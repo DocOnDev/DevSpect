@@ -12,7 +12,7 @@ dev = (_arr) ->
   nCount = _arr.length
   _total = calcs.sum(_arr)
   _sqrTotal = calcs.square_sum(_arr)
-  variance = (_sqrTotal - (( _total * _total)/nCount)) / nCount
+  variance = Math.max(0,(_sqrTotal - ((_total * _total)/nCount)) / nCount)
   return calcs.root(variance)
 
 avg = (_arr, count) ->
@@ -66,7 +66,6 @@ routes = (app) ->
         dev_high = parseInt(_avg + _dev)
         _devs.push [_date, dev_low, dev_high]
 
-      console.log _avgs
       series.push {type: 'column', name: 'Velocity', data: _velocity}
       series.push {type: 'areasplinerange', name: 'Deviation', data: _devs}
       series.push {type: 'spline', name: 'Average', data: _avgs}
