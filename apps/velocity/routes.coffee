@@ -2,6 +2,19 @@ Project = require('../../models/project').Project
 VelocityChart = require('../../models/velocity_chart').VelocityChart
 {upperFirst, toDateFormat} = require '../formatters'
 
+calcs =
+  root: Math.sqrt
+  square: (x) -> x * x
+  sum: (x) -> x.reduce (a,b) -> a+b
+  square_sum: (x) -> x.reduce (a,b) -> a+calcs.square(b)
+
+dev = (_arr) ->
+  nCount = _arr.length
+  _total = calcs.sum(_arr)
+  _sqrTotal = calcs.square_sum(_arr)
+  variance = (_sqrTotal - (( _total * _total)/nCount)) / nCount
+  return calcs.root(variance)
+
 avg = (_arr, count) ->
   if count <= _arr.length
     return (_arr.slice(-1*count).reduce (a,b) -> a+b) / count
@@ -39,14 +52,23 @@ routes = (app) ->
       _velocity = []
       _points = []
       _avgs = []
+      _devs = []
+      _dev_low = []
+      _dev_high = []
       for doc in docs
         _date = toDateFormat doc.date
         _velocity.push [_date, doc.points]
         _points.push doc.points
-        _avgs.push [_date, avg(_points, 3)]
+        _avg = avg(_points, 3)
+        _avgs.push [_date, _avg]
+        _dev = dev(_points)
+        dev_low = parseInt(_avg - _dev)
+        dev_high = parseInt(_avg + _dev)
+        _devs.push [_date, dev_low, dev_high]
 
       console.log _avgs
       series.push {type: 'column', name: 'Velocity', data: _velocity}
+      series.push {type: 'areasplinerange', name: 'Deviation', data: _devs}
       series.push {type: 'spline', name: 'Average', data: _avgs}
       res.render "#{__dirname}/views/index",
         title: 'Velocity Chart'
