@@ -5,6 +5,9 @@ block content
   ul
     - each project in projects
       li 
-        a(href="cfd/#{project.uri}") #{project.name} CFD
-      li 
-        a(href="velocity/#{project.uri}") #{project.name} Velocity
+        | #{project.name} : 
+        a(href="cfd/#{project.uri}") CFD 
+        |  / 
+        a(href="velocity/#{project.uri}") Velocity 
+        |  / 
+        a(href="burn/#{project.uri}") Burn Down
