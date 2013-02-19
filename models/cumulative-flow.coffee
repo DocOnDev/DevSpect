@@ -15,11 +15,4 @@ class CumulativeFlow extends CradleModel
 
       callback null, records
 
-        #  save:
-        #    @db.save records, (err, res) ->
-        #      if (err)
-        #        callback err
-        #      else
-        #        callback null, records
-
 exports.CumulativeFlow = CumulativeFlow
