@@ -15,12 +15,12 @@ $(function () {
         }
       },
       title: { text: _chartTitle },
-      xAxis: { type: 'datetime', tickInterval: (24 * 3600 * 1000 ), maxZoom: (7 * 24 * 3600000),
+      xAxis: { type: 'datetime', minTickInterval: (24 * 3600 * 1000 ), maxZoom: (7 * 24 * 3600000),
         title: { text: null },
         dateTimeLabelFormats: {
-           day: '%d-%b-%Y',
-           week: '%d-%b-%Y',
-           month: '%b \'%y',
+           day: '%m/%d/%y',
+           week: '%d-%b-%y',
+           month: '%b-%Y',
            year: '%Y'
        } },
       yAxis: { title: { text: 'Points' } },

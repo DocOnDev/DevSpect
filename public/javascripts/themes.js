@@ -10,7 +10,7 @@ $(document).ready(function() {
    colors: ['#058DC7', '#50B432', '#ED561B', '#DDDF00', '#24CBE5', '#64E572', '#FF9655', '#FFF263', '#6AF9C4']
    colors: ["#514F78", "#42A07B", "#9B5E4A", "#72727F", "#1F949A", "#82914E", "#86777F", "#42A07B"],
     */
-  var defaultColors = ["#ccccff", "#ff7538", "#ffd700", "#0087bd", "#009f6b", "#c40233", "#333355", "#252b95", "#3941e3", "#000681","#61a179", "#666ce3"]
+  var defaultColors = ["#ccccff", "#ff7538", "#ffd700", "#0087bd", "#009f6b", "#c40233", "#5588AA", "#252b95", "#3941e3", "#000681","#61a179", "#666ce3"]
   _chartColors = (typeof chartColors != 'undefined' ? chartColors : defaultColors);
 
   Highcharts.theme = {
