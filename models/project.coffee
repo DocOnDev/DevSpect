@@ -14,4 +14,13 @@ class Project extends CradleModel
 
       callback null, false
 
+  displayName: (callback) ->
+    @db.view 'project/list', {descending: true}, (err, res) =>
+      return callback err, null if err
+
+      for project in res when project.id == "project/#{@name}"
+        return callback null, project.key
+
+      callback null, ''
+
 exports.Project = Project

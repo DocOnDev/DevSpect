@@ -42,12 +42,17 @@ routes = (app) ->
             states[state] = [[_date, points]]
       for name, values of states
         series.push {name: name, data: values}
-      res.render "#{__dirname}/views/index",
-        title: 'Cumulative Flow Diagram'
-        charttitle: upperFirst(project_name)
-        stylesheet: 'cfd'
-        err: err
-        cfds: docs
-        series: JSON.stringify(series)
+      prj = new Project project_name
+      prj.displayName (err, display_name) ->
+        if (err)
+          display_name = project_name
+
+        res.render "#{__dirname}/views/index",
+          title: 'Cumulative Flow Diagram'
+          charttitle: upperFirst(display_name)
+          stylesheet: 'cfd'
+          err: err
+          cfds: docs
+          series: JSON.stringify(series)
 
 module.exports = routes
