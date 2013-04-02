@@ -45,6 +45,10 @@ $(function () {
       },
       series: _dataSeries
     });
+
+    // Hide icebox. Bug in tool forces us to perform this hack rather than set property in series.
+    //  In a stacked graph, if the first item is invisible on render, chart doesn't show.
+    chart.series[0].setVisible(false);
   });
 });
 
