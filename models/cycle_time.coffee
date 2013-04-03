@@ -17,13 +17,11 @@ class CycleTime extends CradleModel
           record.throughput = record.velocity / 5
           record.wip = 1
           for c in cycle when c.date = record.date
-            console.log c
             record.wip = c.value.points
           record.cycle_time = (record.wip / record.throughput)
           record.date = new Date(record.date)
           record
 
-        console.log 'Records: ', records
         callback null, records
 
 exports.CycleTime = CycleTime
