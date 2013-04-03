@@ -3,7 +3,7 @@ var chart;
 $(function () {
   $(document).ready(function() {
     _dataSeries = (typeof dataSeries != 'undefined' ? dataSeries : []);
-    _chartTitle = (typeof chartTitle != 'undefined' ? chartTitle : 'Velocity Chart');
+    _chartTitle = (typeof chartTitle != 'undefined' ? chartTitle : 'Cycle Time');
 
     chart = new Highcharts.Chart({
       chart: { renderTo: 'container', type: 'column' },
@@ -25,7 +25,7 @@ $(function () {
         floating: true,
         shadow: true
       },
-      tooltip: { valueSuffix: ' points' },
+      tooltip: { valueSuffix: ' days/point' },
       plotOptions: {
         column: {
           pointPadding: 0.2,
