@@ -14,6 +14,7 @@ dev = (_arr) ->
   _total = calcs.sum(_arr)
   _sqrTotal = calcs.square_sum(_arr)
   variance = Math.max(0,(_sqrTotal - ((_total * _total)/nCount)) / nCount)
+  console.log variance
   return calcs.root(variance)
 
 avg = (_arr, count) ->
