@@ -7,13 +7,7 @@ $(function () {
     _chartTitle = (typeof chartTitle != 'undefined' ? chartTitle : 'Cumulative Flow Diagram');
 
     chart = new Highcharts.Chart({
-      chart: { renderTo: 'container', type: 'area', zoomType: 'x',
-        events: { 
-          selection: function(event) { 
-            event.target.yAxis[0].setExtremes(event.target.series[6].dataMin, event.target.yAxis.dataMax);
-          }
-        }
-      },
+      chart: { renderTo: 'container', type: 'area', zoomType: 'xy' },
       title: { text: _chartTitle },
       xAxis: { type: 'datetime', minTickInterval: (24 * 3600 * 1000 ), maxZoom: (7 * 24 * 3600000),
         title: { text: null },
